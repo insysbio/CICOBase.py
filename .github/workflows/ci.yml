@@ -107,9 +107,10 @@ jobs:
           python -m pip install -e .[docs]
           sphinx-build -d .doctrees -b html docs site
 
-      - name: Upload documentation artifact
-        uses: actions/upload-pages-artifact@v5
+      - name: Upload documentation site
+        uses: actions/upload-artifact@v6
         with:
+          name: documentation-site
           path: site
 
   deploy-docs:
@@ -118,17 +119,23 @@ jobs:
     needs: docs
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
 
     steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@v6
+      - name: Download documentation site
+        uses: actions/download-artifact@v6
+        with:
+          name: documentation-site
+          path: site
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Publish to gh-pages
+        run: |
+          touch site/.nojekyll
+          git init pages
+          git -C pages config user.name "github-actions[bot]"
+          git -C pages config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C pages checkout --orphan gh-pages
+          cp -R site/. pages/
+          git -C pages add .
+          git -C pages commit -m "Deploy documentation"
+          git -C pages push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages
