@@ -1,0 +1,2 @@
+# Development, test, docs, and packaging tooling.
+-e .[dev]

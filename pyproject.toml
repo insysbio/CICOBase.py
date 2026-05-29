@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "likelihoodprofiler"
+version = "0.3.0"
+description = "Python port of CICO/LikelihoodProfiler routines for practical identifiability analysis and confidence interval evaluation."
+readme = "README.rst"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Evgeny Metelkin", email = "metelkin@insysbio.com" },
+    { name = "Ivan Borisov" },
+    { name = "Victoria Tkachenko" },
+]
+keywords = [
+    "confidence intervals",
+    "identifiability analysis",
+    "likelihood profiling",
+    "optimization",
+    "systems biology",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "matplotlib>=3.6",
+    "nlopt>=2.7",
+    "numpy>=1.23",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8",
+]
+docs = [
+    "sphinx>=8",
+    "sphinx-rtd-theme>=3",
+]
+build = [
+    "build>=1.2",
+    "twine>=5",
+]
+dev = [
+    "build>=1.2",
+    "pytest>=8",
+    "sphinx>=8",
+    "sphinx-rtd-theme>=3",
+    "tox>=4",
+    "twine>=5",
+]
+
+[project.urls]
+Homepage = "https://github.com/insysbio/LikelihoodProfiler.py"
+Repository = "https://github.com/insysbio/LikelihoodProfiler.py"
+Issues = "https://github.com/insysbio/LikelihoodProfiler.py/issues"
+Documentation = "https://insysbio.github.io/LikelihoodProfiler.py/"
+Upstream = "https://github.com/insysbio/CICOBase.jl"
+
+[tool.setuptools]
+packages = ["likelihoodprofiler"]
+
+[tool.pytest.ini_options]
+testpaths = ["likelihoodprofiler/tests"]

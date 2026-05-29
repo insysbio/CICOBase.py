@@ -1,68 +1,148 @@
-.. image::
-   https://img.shields.io/website-up-down-green-red/https/insysbio.github.io/LikelihoodProfiler.py.svg
-   :height: 20
-   :target: https://insysbio.github.io/LikelihoodProfiler.py/
-   :alt: Documentation
+LikelihoodProfiler.py
+=====================
 
-.. image::
-   https://github.com/insysbio/LikelihoodProfiler.py/workflows/CI/badge.svg
+.. image:: https://github.com/insysbio/LikelihoodProfiler.py/actions/workflows/ci.yml/badge.svg
    :height: 20
-   :target: https://github.com/insysbio/LikelihoodProfiler.py/actions
-   :alt: Github actions build status
+   :target: https://github.com/insysbio/LikelihoodProfiler.py/actions/workflows/ci.yml
+   :alt: CI
 
-.. image::
-   https://zenodo.org/badge/DOI/10.1371/journal.pcbi.1008495.svg
+.. image:: https://img.shields.io/badge/python-3.10%2B-blue
+   :height: 20
+   :alt: Python 3.10+
+
+.. image:: https://zenodo.org/badge/DOI/10.1371/journal.pcbi.1008495.svg
    :height: 20
    :target: https://doi.org/10.1371/journal.pcbi.1008495
    :alt: DOI:10.1371/journal.pcbi.1008495
 
-Notes
-*****
+``LikelihoodProfiler.py`` is a Python port of the CICO/LikelihoodProfiler
+algorithms for practical identifiability analysis and confidence interval
+evaluation.
 
-This repository is the one-to-one translation of Julia's package https://github.com/insysbio/LikelihoodProfiler.jl of version 0.3.0.
+The original Julia code line was published as ``LikelihoodProfiler.jl`` until
+January 2025; its low-level computational core now lives in
+`CICOBase.jl <https://github.com/insysbio/CICOBase.jl>`_.  This Python package
+keeps the historical 0.3.0-era API and is useful for compatibility, experiments,
+and validating Python translations of the original routines.  For new Julia
+workflows, prefer CICOBase.jl and the current Julia ecosystem.
 
-Currently the Python's version is not maintained. Use https://github.com/insysbio/LikelihoodProfiler.py/issues if any help wanted.
+Status
+------
 
-Intro
-*****
+This repository was previously tied to a frozen 2019 development environment.
+The project metadata has been moved to ``pyproject.toml`` and the dependencies
+are now limited to the packages imported by the library:
 
-**LikelihoodProfiler** is a package for identifiability analysis and confidence intervals evaluation which was originally
- written in **Julia** language. See https://github.com/insysbio/LikelihoodProfiler.jl
+* ``numpy``
+* ``nlopt``
+* ``matplotlib``
+
+Development, documentation, and build tools are exposed through optional extras
+instead of being mixed into runtime installation.
 
 Installation
-************
+------------
 
-If your OS is Windows, you have to install NLopt wheel. Go to
-  https://www.lfd.uci.edu/~gohlke/pythonlibs/#nlopt
+From a checkout:
 
-Download the wheel which suits you and install it with:
+.. code-block:: powershell
 
-  pip install NLopt-***.whl
+   python -m venv .venv
+   .\.venv\Scripts\python -m pip install -U pip setuptools wheel
+   .\.venv\Scripts\python -m pip install -e .
 
-Then clone LikelihoodProfiler from
-  https://github.com/insysbio/LikelihoodProfiler.py.git
+On macOS or Linux:
 
-Install LikelihoodProfiler requirements with:
+.. code-block:: bash
 
-  pip install -r requirements.txt
+   python -m venv .venv
+   . .venv/bin/activate
+   python -m pip install -U pip setuptools wheel
+   python -m pip install -e .
 
-Quick start
-***********
+For development:
 
-Plot simple profile::
+.. code-block:: bash
 
-  from likelihoodprofiler import get_interval
-  f_3p_1im_dep = lambda x: 5.0 + (x[0]-3.0)**2 + (x[0]-x[1]-1.0)**2 + 0*x[2]**2
-  res0 = get_interval(
-      [3., 2., 2.1],
-      0,
-      lambda x: f_3p_1im_dep(x),
-      "LIN_EXTRAPOL",
-      loss_crit = 9)
-  res0.plot()
-.. figure:: docs\plot.png
-    :width: 455px
-    :align: center
-    :height: 312px
-    :alt: alternate text
-    :figclass: align-center
+   python -m pip install -r requirements-dev.txt
+
+Quick Start
+-----------
+
+Python uses zero-based parameter indexes.  The example below computes the
+confidence interval for the first parameter component, ``x[0]``.
+
+.. code-block:: python
+
+   from likelihoodprofiler import get_interval
+
+   def loss(x):
+       return 5.0 + (x[0] - 3.0) ** 2 + (x[0] - x[1] - 1.0) ** 2 + 0 * x[2] ** 2
+
+   result = get_interval(
+       [3.0, 2.0, 2.1],
+       0,
+       loss,
+       "LIN_EXTRAPOL",
+       loss_crit=9,
+   )
+
+   result.plot()
+
+Validation
+----------
+
+Run the unit test suite:
+
+.. code-block:: bash
+
+   python -m pytest
+
+Build the documentation:
+
+.. code-block:: bash
+
+   sphinx-build -d .doctrees -b html docs site
+
+Build source and wheel distributions:
+
+.. code-block:: bash
+
+   python -m build
+   python -m twine check dist/*
+
+The same checks are wired into GitHub Actions for supported Python versions.
+
+Compatibility Notes
+-------------------
+
+* Supported Python versions are 3.10 and newer.
+* ``nlopt`` is a compiled dependency.  Modern releases publish wheels for common
+  Python/platform combinations; if a wheel is unavailable for a platform, a
+  local compiler toolchain may be required.
+* The package source and tests intentionally remain close to the historical
+  port.  Infrastructure updates should avoid changing numerical behavior unless
+  the change is covered by tests and compared against the Julia upstream.
+
+Documentation
+-------------
+
+Hosted documentation for this repository is available at
+https://insysbio.github.io/LikelihoodProfiler.py/.
+
+The upstream Julia package is documented at
+https://insysbio.github.io/CICOBase.jl/latest/.
+
+Citation
+--------
+
+Borisov I, Metelkin E (2020) Confidence intervals by constrained optimization:
+An algorithm and software package for practical identifiability analysis in
+systems biology. PLoS Computational Biology 16(12): e1008495.
+
+Reference: https://doi.org/10.1371/journal.pcbi.1008495
+
+License
+-------
+
+MIT. See ``LICENSE``.
