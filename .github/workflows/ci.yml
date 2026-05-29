@@ -43,7 +43,6 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-          cache: pip
 
       - name: Install package and test dependencies
         run: |
@@ -71,7 +70,6 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
-          cache: pip
 
       - name: Build and verify distributions
         run: |
@@ -99,7 +97,6 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
-          cache: pip
 
       - name: Build documentation
         run: |
