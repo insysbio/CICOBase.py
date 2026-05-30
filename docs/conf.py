@@ -18,10 +18,22 @@ import os
 import sys
 #import sphinx_rtd_theme
 import sphinx
+from importlib import metadata
+import tomllib
 
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
 sys.path.insert(0, os.path.abspath('../cicobase'))
+
+
+def get_project_version():
+    """Read the package version from installed metadata or pyproject.toml."""
+    try:
+        return metadata.version('cicobase')
+    except metadata.PackageNotFoundError:
+        pyproject_path = os.path.abspath(os.path.join('..', 'pyproject.toml'))
+        with open(pyproject_path, 'rb') as pyproject_file:
+            return tomllib.load(pyproject_file)['project']['version']
 
 # -- Project information -----------------------------------------------------
 
@@ -29,8 +41,11 @@ project = 'CICOBase.py'
 copyright = '2019, Evgeny Metelkin, Ivan Borisov, Victoria Tkachenko'
 author = 'Evgeny Metelkin, Ivan Borisov, Victoria Tkachenko'
 
-# The full version, including alpha/beta/rc tags
-release = '0.3.0'
+# The full version, including alpha/beta/rc tags.
+release = get_project_version()
+
+# The short X.Y version.
+version = '.'.join(release.split('.')[:2])
 
 
 # -- General configuration ---------------------------------------------------

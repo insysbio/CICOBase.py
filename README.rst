@@ -1,28 +1,31 @@
 CICOBase.py
 ===========
 
-.. image:: https://github.com/insysbio/CICOBase.py/actions/workflows/ci.yml/badge.svg
+|CI| |Python| |DOI|
+
+.. |CI| image:: https://github.com/insysbio/CICOBase.py/actions/workflows/ci.yml/badge.svg
    :height: 20
    :target: https://github.com/insysbio/CICOBase.py/actions/workflows/ci.yml
    :alt: CI
 
-.. image:: https://img.shields.io/badge/python-3.10%2B-blue
+.. |Python| image:: https://img.shields.io/badge/python-3.10%2B-blue
    :height: 20
    :alt: Python 3.10+
 
-.. image:: https://zenodo.org/badge/DOI/10.1371/journal.pcbi.1008495.svg
+.. |DOI| image:: https://zenodo.org/badge/DOI/10.1371/journal.pcbi.1008495.svg
    :height: 20
    :target: https://doi.org/10.1371/journal.pcbi.1008495
    :alt: DOI:10.1371/journal.pcbi.1008495
 
-``CICOBase.py`` is the Python port of the CICOBase routines for practical
+``CICOBase.py`` is the Python port of the ``CICOBase.jl`` routines for practical
 identifiability analysis and confidence interval evaluation.
 
 The upstream Julia implementation lives in
 `CICOBase.jl <https://github.com/insysbio/CICOBase.jl>`_.  That Julia code line
 was published as ``LikelihoodProfiler.jl`` until January 2025; the low-level
 computational core is now named CICOBase.  This repository follows that naming
-and keeps the historical Python 0.3.0-era API available for compatibility.
+and keeps the historical ``likelihoodprofiler`` import path available for
+compatibility.
 
 Naming and Compatibility
 ------------------------
