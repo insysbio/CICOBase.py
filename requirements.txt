@@ -2,6 +2,7 @@
 #
 # The previous requirements.txt was a full 2019 development-environment freeze.
 # Keep this file small so applications can install only what the package imports.
-matplotlib>=3.6
-nlopt>=2.7
-numpy>=1.23
+# Use constraints.txt for reproducible local/CI environments.
+matplotlib>=3.6,<4
+nlopt>=2.10,<2.11
+numpy>=1.23,<3

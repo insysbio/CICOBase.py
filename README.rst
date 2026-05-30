@@ -38,7 +38,10 @@ are now limited to the packages imported by the library:
 * ``matplotlib``
 
 Development, documentation, and build tools are exposed through optional extras
-instead of being mixed into runtime installation.
+instead of being mixed into runtime installation.  Runtime package metadata uses
+compatible version ranges so the library can coexist with user environments.
+Continuous integration and local development use ``constraints.txt`` to keep
+resolved versions reproducible.
 
 Installation
 ------------
@@ -65,6 +68,12 @@ For development:
 .. code-block:: bash
 
    python -m pip install -r requirements-dev.txt
+
+For a reproducible test-only install:
+
+.. code-block:: bash
+
+   python -m pip install -c constraints.txt -e .[test]
 
 Quick Start
 -----------
@@ -98,6 +107,12 @@ Run the unit test suite:
 
    python -m pytest
 
+Run the test suite in a fresh constrained environment with tox:
+
+.. code-block:: bash
+
+   tox -e py314
+
 Build the documentation:
 
 .. code-block:: bash
@@ -120,6 +135,8 @@ Compatibility Notes
 * ``nlopt`` is a compiled dependency.  Modern releases publish wheels for common
   Python/platform combinations; if a wheel is unavailable for a platform, a
   local compiler toolchain may be required.
+* CI currently constrains ``nlopt`` to ``2.10.0`` for reproducibility while the
+  package metadata allows any compatible ``2.10.x`` release.
 * The package source and tests intentionally remain close to the historical
   port.  Infrastructure updates should avoid changing numerical behavior unless
   the change is covered by tests and compared against the Julia upstream.

@@ -47,7 +47,7 @@ jobs:
       - name: Install package and test dependencies
         run: |
           python -m pip install -U pip
-          python -m pip install -e .[test]
+          python -m pip install -c constraints.txt -e .[test]
 
       - name: Import and byte-compile package
         run: |
@@ -74,7 +74,7 @@ jobs:
       - name: Build and verify distributions
         run: |
           python -m pip install -U pip
-          python -m pip install .[build]
+          python -m pip install -c constraints.txt .[build]
           python -m build
           python -m twine check dist/*
 
@@ -101,7 +101,7 @@ jobs:
       - name: Build documentation
         run: |
           python -m pip install -U pip
-          python -m pip install -e .[docs]
+          python -m pip install -c constraints.txt -e .[docs]
           sphinx-build -d .doctrees -b html docs site
 
   deploy-docs:
@@ -124,7 +124,7 @@ jobs:
       - name: Build documentation
         run: |
           python -m pip install -U pip
-          python -m pip install -e .[docs]
+          python -m pip install -c constraints.txt -e .[docs]
           sphinx-build -d .doctrees -b html docs site
 
       - name: Publish to gh-pages

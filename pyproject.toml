@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=77", "wheel"]
+requires = ["setuptools>=77,<83", "wheel>=0.45,<0.48"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -10,7 +10,7 @@ readme = "README.rst"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [
-    { name = "Evgeny Metelkin", email = "metelkin@insysbio.com" },
+    { name = "Evgeny Metelkin" },
     { name = "Ivan Borisov" },
     { name = "Victoria Tkachenko" },
 ]
@@ -34,30 +34,30 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "matplotlib>=3.6",
-    "nlopt>=2.7",
-    "numpy>=1.23",
+    "matplotlib>=3.6,<4",
+    "nlopt>=2.10,<2.11",
+    "numpy>=1.23,<3",
 ]
 
 [project.optional-dependencies]
 test = [
-    "pytest>=8",
+    "pytest>=8,<10",
 ]
 docs = [
-    "sphinx>=8",
-    "sphinx-rtd-theme>=3",
+    "sphinx>=8,<10",
+    "sphinx-rtd-theme>=3,<4",
 ]
 build = [
-    "build>=1.2",
-    "twine>=5",
+    "build>=1.2,<2",
+    "twine>=5,<7",
 ]
 dev = [
-    "build>=1.2",
-    "pytest>=8",
-    "sphinx>=8",
-    "sphinx-rtd-theme>=3",
-    "tox>=4",
-    "twine>=5",
+    "build>=1.2,<2",
+    "pytest>=8,<10",
+    "sphinx>=8,<10",
+    "sphinx-rtd-theme>=3,<4",
+    "tox>=4,<5",
+    "twine>=5,<7",
 ]
 
 [project.urls]
