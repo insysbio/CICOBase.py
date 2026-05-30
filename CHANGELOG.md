@@ -1,5 +1,17 @@
 # Changelog
 
+## Upstream Julia Mapping
+
+These mappings describe the upstream Julia release lineage used by each Python
+release; they are not runtime dependencies.
+
+| Python release | Upstream Julia release |
+| --- | --- |
+| [v0.4.0] | [CICOBase.jl v0.3.1][cico-v0.3.1] |
+| [v0.3.1] | [LikelihoodProfiler.jl v0.3.1][lp-v0.3.1] |
+| [v0.3.0] | [LikelihoodProfiler.jl v0.3.0][lp-v0.3.0] |
+| [v0.2.1] | [LikelihoodProfiler.jl v0.2.1][lp-v0.2.1] |
+
 ## [v0.4.0] - 2026-05-30
 
 ### Added
@@ -59,8 +71,11 @@
 - Added core `likelihoodprofiler` routines, tests, documentation, and CI configuration.
 - Added Windows/AppVeyor and Travis CI setup used by the early project history.
 
-[Unreleased]: https://github.com/insysbio/CICOBase.py/compare/v0.4.0...master
 [v0.4.0]: https://github.com/insysbio/CICOBase.py/compare/v0.3.1...v0.4.0
 [v0.3.1]: https://github.com/insysbio/CICOBase.py/releases/tag/v0.3.1
 [v0.3.0]: https://github.com/insysbio/CICOBase.py/releases/tag/v0.3.0
 [v0.2.1]: https://github.com/insysbio/CICOBase.py/releases/tag/v0.2.1
+[cico-v0.3.1]: https://github.com/insysbio/CICOBase.jl/releases/tag/v0.3.1
+[lp-v0.3.1]: https://github.com/insysbio/LikelihoodProfiler.jl/releases/tag/v0.3.1
+[lp-v0.3.0]: https://github.com/insysbio/LikelihoodProfiler.jl/releases/tag/v0.3.0
+[lp-v0.2.1]: https://github.com/insysbio/LikelihoodProfiler.jl/releases/tag/v0.2.1
