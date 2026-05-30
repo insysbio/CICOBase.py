@@ -21,16 +21,16 @@ import sphinx
 
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
-sys.path.insert(0, os.path.abspath('../likelihoodprofiler'))
+sys.path.insert(0, os.path.abspath('../cicobase'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'likelihoodprofiler'
+project = 'CICOBase.py'
 copyright = '2019, Evgeny Metelkin, Ivan Borisov, Victoria Tkachenko'
 author = 'Evgeny Metelkin, Ivan Borisov, Victoria Tkachenko'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = '0.3.0'
 
 
 # -- General configuration ---------------------------------------------------

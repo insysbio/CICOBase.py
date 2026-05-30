@@ -51,8 +51,8 @@ jobs:
 
       - name: Import and byte-compile package
         run: |
-          python -m compileall -q likelihoodprofiler
-          python -c "import likelihoodprofiler"
+          python -m compileall -q cicobase likelihoodprofiler
+          python -c "import cicobase; import likelihoodprofiler"
 
       - name: Run tests
         run: python -m pytest

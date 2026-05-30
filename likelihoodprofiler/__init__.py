@@ -1,14 +1,26 @@
+"""Compatibility import path for the former ``likelihoodprofiler`` package.
+
+New code should import from ``cicobase``.
+"""
+
+import importlib
 import sys
-import os
 
-filename = os.path.join("../../")
-sys.path.append(filename)
-filename = os.path.join("../")
-sys.path.append(filename)
+from cicobase import *  # noqa: F401,F403
 
-from .get_endpoint import get_endpoint
-from .get_interval import get_interval
-from .cico_one_pass import get_right_endpoint_cico
-from .get_right_endpoint_by_lin_extrapol import get_right_endpoint_by_lin_extrapol
-from .method_quadr_extrapol import get_right_endpoint_by_quadr_extrapol
-from .profile import profile
+_SUBMODULES = (
+    "cico_one_pass",
+    "get_endpoint",
+    "get_interval",
+    "get_right_endpoint",
+    "get_right_endpoint_by_lin_extrapol",
+    "method_quadr_extrapol",
+    "profile",
+    "structures",
+    "support_math_func",
+)
+
+for _name in _SUBMODULES:
+    sys.modules[f"{__name__}.{_name}"] = importlib.import_module(f"cicobase.{_name}")
+
+del importlib, sys, _name

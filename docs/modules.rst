@@ -1,7 +1,7 @@
-likelihoodprofiler
-==================
+cicobase
+========
 
 .. toctree::
    :maxdepth: 4
 
-   likelihoodprofiler
+   cicobase

@@ -1,9 +1,9 @@
-LikelihoodProfiler.py
-=====================
+CICOBase.py
+===========
 
-.. image:: https://github.com/insysbio/LikelihoodProfiler.py/actions/workflows/ci.yml/badge.svg
+.. image:: https://github.com/insysbio/CICOBase.py/actions/workflows/ci.yml/badge.svg
    :height: 20
-   :target: https://github.com/insysbio/LikelihoodProfiler.py/actions/workflows/ci.yml
+   :target: https://github.com/insysbio/CICOBase.py/actions/workflows/ci.yml
    :alt: CI
 
 .. image:: https://img.shields.io/badge/python-3.10%2B-blue
@@ -15,16 +15,32 @@ LikelihoodProfiler.py
    :target: https://doi.org/10.1371/journal.pcbi.1008495
    :alt: DOI:10.1371/journal.pcbi.1008495
 
-``LikelihoodProfiler.py`` is a Python port of the CICO/LikelihoodProfiler
-algorithms for practical identifiability analysis and confidence interval
-evaluation.
+``CICOBase.py`` is the Python port of the CICOBase routines for practical
+identifiability analysis and confidence interval evaluation.
 
-The original Julia code line was published as ``LikelihoodProfiler.jl`` until
-January 2025; its low-level computational core now lives in
-`CICOBase.jl <https://github.com/insysbio/CICOBase.jl>`_.  This Python package
-keeps the historical 0.3.0-era API and is useful for compatibility, experiments,
-and validating Python translations of the original routines.  For new Julia
-workflows, prefer CICOBase.jl and the current Julia ecosystem.
+The upstream Julia implementation lives in
+`CICOBase.jl <https://github.com/insysbio/CICOBase.jl>`_.  That Julia code line
+was published as ``LikelihoodProfiler.jl`` until January 2025; the low-level
+computational core is now named CICOBase.  This repository follows that naming
+and keeps the historical Python 0.3.0-era API available for compatibility.
+
+Naming and Compatibility
+------------------------
+
+New Python code should import from ``cicobase``:
+
+.. code-block:: python
+
+   from cicobase import get_interval
+
+The old top-level import path is still available as a compatibility shim:
+
+.. code-block:: python
+
+   from likelihoodprofiler import get_interval
+
+The compatibility shim is intentionally small.  New examples, documentation,
+and tests use ``cicobase`` as the primary package name.
 
 Status
 ------
@@ -37,11 +53,9 @@ are now limited to the packages imported by the library:
 * ``nlopt``
 * ``matplotlib``
 
-Development, documentation, and build tools are exposed through optional extras
-instead of being mixed into runtime installation.  Runtime package metadata uses
-compatible version ranges so the library can coexist with user environments.
-Continuous integration and local development use ``constraints.txt`` to keep
-resolved versions reproducible.
+Runtime package metadata uses compatible version ranges so the library can
+coexist with user environments.  Continuous integration and local development
+use ``constraints.txt`` to keep resolved versions reproducible.
 
 Installation
 ------------
@@ -83,7 +97,7 @@ confidence interval for the first parameter component, ``x[0]``.
 
 .. code-block:: python
 
-   from likelihoodprofiler import get_interval
+   from cicobase import get_interval
 
    def loss(x):
        return 5.0 + (x[0] - 3.0) ** 2 + (x[0] - x[1] - 1.0) ** 2 + 0 * x[2] ** 2
@@ -144,8 +158,8 @@ Compatibility Notes
 Documentation
 -------------
 
-Hosted documentation for this repository is available at
-https://insysbio.github.io/LikelihoodProfiler.py/.
+Hosted documentation for this repository is expected at
+https://insysbio.github.io/CICOBase.py/.
 
 The upstream Julia package is documented at
 https://insysbio.github.io/CICOBase.jl/latest/.

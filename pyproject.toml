@@ -3,9 +3,9 @@ requires = ["setuptools>=77,<83", "wheel>=0.45,<0.48"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "likelihoodprofiler"
+name = "cicobase"
 version = "0.3.0"
-description = "Python port of CICO/LikelihoodProfiler routines for practical identifiability analysis and confidence interval evaluation."
+description = "Python port of CICOBase routines for practical identifiability analysis and confidence interval evaluation."
 readme = "README.rst"
 requires-python = ">=3.10"
 license = "MIT"
@@ -61,14 +61,14 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/insysbio/LikelihoodProfiler.py"
-Repository = "https://github.com/insysbio/LikelihoodProfiler.py"
-Issues = "https://github.com/insysbio/LikelihoodProfiler.py/issues"
-Documentation = "https://insysbio.github.io/LikelihoodProfiler.py/"
+Homepage = "https://github.com/insysbio/CICOBase.py"
+Repository = "https://github.com/insysbio/CICOBase.py"
+Issues = "https://github.com/insysbio/CICOBase.py/issues"
+Documentation = "https://insysbio.github.io/CICOBase.py/"
 Upstream = "https://github.com/insysbio/CICOBase.jl"
 
 [tool.setuptools]
-packages = ["likelihoodprofiler"]
+packages = ["cicobase", "likelihoodprofiler"]
 
 [tool.pytest.ini_options]
-testpaths = ["likelihoodprofiler/tests"]
+testpaths = ["cicobase/tests"]
